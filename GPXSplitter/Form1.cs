@@ -23,7 +23,7 @@ namespace GPXSplitter
             List<int> lengths = new List<int>();
             System.Xml.Serialization.XmlSerializer reader =
             new System.Xml.Serialization.XmlSerializer(typeof(gpxType));
-            System.IO.StreamReader file = new System.IO.StreamReader(@"d:\gpx\test.gpx");
+            System.IO.StreamReader file = new System.IO.StreamReader(@Pathin.Text);
             gpxType overview = new gpxType();
             gpxType gpxout = new gpxType();
             overview = (gpxType)reader.Deserialize(file);
@@ -91,9 +91,27 @@ namespace GPXSplitter
                     gpxout.trk[i].trkseg[0].trkpt[j] = overview.trk[0].trkseg[0].trkpt[j + jumppos[i]];
                 }
             }
-            System.IO.TextWriter writer = new System.IO.StreamWriter(@"d:\gpx\testout.gpx");
+            System.IO.TextWriter writer = new System.IO.StreamWriter(@Pathout.Text);
             reader.Serialize(writer, gpxout);
             writer.Close();
+        }
+
+        private void loadinbutton_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                Pathin.Text = @openFileDialog1.FileName;
+                Pathout.Text = Pathin.Text.Replace(".gpx","v2.gpx");
+            }
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void Pathin_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
