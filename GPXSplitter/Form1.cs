@@ -58,8 +58,12 @@ namespace GPXSplitter
         private void loadinbutton_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                Pathin.Text = @openFileDialog1.FileName;
-                Pathout.Text = Pathin.Text.Replace(".gpx","v2.gpx");
+                foreach (String file in openFileDialog1.FileNames)
+                {
+                    Pathin.Text = @file;
+                    Pathout.Text = Pathin.Text.Replace(".gpx", "v2.gpx");
+                    button1_Click(sender, e);
+                }
             }
         }
 
